@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html data-theme="coordinador" class="bg-base-100" xmlns:th="http://www.thymeleaf.org" style="color-scheme: light;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva Ruta - Coordinador</title>
+    <link th:href="@{/css/output.css}" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+<div class="navbar bg-primary text-primary-content">
+    <div class="flex-1 px-2 mx-2 font-bold">Panel Coordinador - JSK</div>
+    <div class="flex-none">
+        <a th:href="@{/logout}" class="btn btn-warning btn-sm">Cerrar sesión</a>
+    </div>
+</div>
+
+<div class="p-6 max-w-lg mx-auto">
+    <div class="bg-white p-6 shadow rounded-lg">
+        <h2 class="text-2xl font-bold mb-6">Crear Nueva Ruta</h2>
+
+        <form th:action="@{/coordinador/rutas/guardar}" method="POST">
+            <div class="form-control mb-4">
+                <label class="label">
+                    <span class="label-text font-semibold">Nombre de la Ruta</span>
+                </label>
+                <input type="text" name="nombre" class="input input-bordered w-full" 
+                       placeholder="Ej: Ruta Norte - Centro Comercial" required>
+            </div>
+
+            <div class="form-control mb-4">
+                <label class="label">
+                    <span class="label-text font-semibold">Descripción</span>
+                </label>
+                <textarea name="descripcion" class="textarea textarea-bordered w-full" 
+                         placeholder="Descripción de la ruta, clientes incluidos, etc." 
+                         rows="3" required></textarea>
+            </div>
+
+            <div class="form-control mb-6">
+                <label class="label">
+                    <span class="label-text font-semibold">Zona</span>
+                </label>
+                <select name="zona" class="select select-bordered w-full" required>
+                    <option value="" disabled selected>Seleccione zona</option>
+                    <option value="NORTE">Zona Norte</option>
+                    <option value="SUR">Zona Sur</option>
+                    <option value="ESTE">Zona Este</option>
+                    <option value="OESTE">Zona Oeste</option>
+                    <option value="CENTRO">Zona Centro</option>
+                </select>
+            </div>
+
+            <div class="flex space-x-4">
+                <a th:href="@{/coordinador/rutas}" class="btn btn-ghost border border-gray-300 flex-1">Cancelar</a>
+                <button type="submit" class="btn btn-primary flex-1">Crear Ruta</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

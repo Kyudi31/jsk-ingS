@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" data-theme="admin" style="color-scheme: light;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Coordinador</title>
+    <link th:href="@{/css/output.css}" rel="stylesheet">
+</head>
+<body class="bg-base-100 min-h-screen">
+
+<!-- Navbar con tema admin -->
+<div class="navbar bg-primary text-primary-content shadow-lg">
+    <div class="flex-1 px-2 mx-2 font-bold text-lg">
+        Panel Admin - JSK
+    </div>
+    <div class="flex-none">
+        <a th:href="@{/logout}" class="btn btn-warning btn-sm">Cerrar sesión</a>
+    </div>
+</div>
+
+<div class="p-6 max-w-lg mx-auto">
+    <div class="bg-base-100 p-6 shadow rounded-lg border border-base-300">
+        <h2 class="text-2xl font-bold mb-6 text-base-content">Crear Coordinador</h2>
+
+        <form th:object="${coordinador}" th:action="@{/admin/coordinadores/guardar}" method="POST">
+            <input type="hidden" name="creadorId" value="1">
+            
+            <div class="form-control mb-4">
+                <label class="label">
+                    <span class="label-text font-semibold text-base-content">Documento de Identidad</span>
+                </label>
+                <input th:field="*{documentoIdentidad}" type="text" class="input input-bordered w-full" required>
+            </div>
+
+            <div class="form-control mb-4">
+                <label class="label">
+                    <span class="label-text font-semibold text-base-content">Nombre</span>
+                </label>
+                <input th:field="*{nombre}" type="text" class="input input-bordered w-full" required>
+            </div>
+
+            <div class="form-control mb-4">
+                <label class="label">
+                    <span class="label-text font-semibold text-base-content">Contraseña</span>
+                </label>
+                <input th:field="*{password}" type="password" class="input input-bordered w-full" required>
+            </div>
+
+            <div class="form-control mb-4">
+                <label class="label">
+                    <span class="label-text font-semibold text-base-content">Zona</span>
+                </label>
+                <input th:field="*{zona}" type="text" class="input input-bordered w-full" required>
+            </div>
+
+            <div class="form-control mb-6">
+                <label class="label">
+                    <span class="label-text font-semibold text-base-content">Empresa</span>
+                </label>
+                <select th:field="*{empresa}" class="select select-bordered w-full" required>
+                    <option value="" disabled selected>Seleccione empresa</option>
+                    <option th:each="empresa : ${empresas}"
+                            th:value="${empresa}"
+                            th:text="${empresa}">
+                    </option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-full">Crear Coordinador</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

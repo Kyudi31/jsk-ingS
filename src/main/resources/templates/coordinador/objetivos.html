@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html data-theme="coordinador" class="bg-base-100" xmlns:th="http://www.thymeleaf.org" style="color-scheme: light;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetivos - Coordinador</title>
+    <link th:href="@{/css/output.css}" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+<!-- Navbar Unificado -->
+<div class="navbar bg-primary text-primary-content">
+    <div class="flex-1 px-2 mx-2 font-bold">
+        Panel Coordinador - JSK
+    </div>
+    <div class="flex-none">
+        <a th:href="@{/logout}" class="btn btn-warning btn-sm">Cerrar sesión</a>
+    </div>
+</div>
+
+<div class="p-6">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold">Gestión de Objetivos</h1>
+        <a th:href="@{/coordinador/objetivos/nuevo}" class="btn btn-primary">+ Nuevo Objetivo</a>
+    </div>
+
+    <!-- Métricas Visuales -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div class="stats shadow bg-white">
+            <div class="stat">
+                <div class="stat-title">Total Objetivos</div>
+                <div class="stat-value text-primary" th:text="${#lists.size(objetivos)}">0</div>
+                <div class="stat-desc">Creados</div>
+            </div>
+        </div>
+        
+        <div class="stats shadow bg-white">
+            <div class="stat">
+                <div class="stat-title">Completados</div>
+                <div class="stat-value text-success" 
+                     th:text="${objetivos.?[estado.name() == 'COMPLETADO'].size()}">0</div>
+                <div class="stat-desc">Objetivos</div>
+            </div>
+        </div>
+        
+        <div class="stats shadow bg-white">
+            <div class="stat">
+                <div class="stat-title">En Progreso</div>
+                <div class="stat-value text-info" 
+                     th:text="${objetivos.?[estado.name() == 'ACTIVO'].size()}">0</div>
+                <div class="stat-desc">Activos</div>
+            </div>
+        </div>
+        
+        <div class="stats shadow bg-white">
+            <div class="stat">
+                <div class="stat-title">Impulsadores</div>
+                <div class="stat-value text-secondary" th:text="${#lists.size(impulsadores)}">0</div>
+                <div class="stat-desc">En equipo</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="overflow-x-auto bg-white p-6 shadow rounded-lg mb-6">
+        <table class="table table-zebra w-full">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Destinatario</th>
+                    <th>Tipo</th>
+                    <th>Progreso</th>
+                    <th>Estado</th>
+                    <th>Vence</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="objetivo : ${objetivos}">
+                    <td class="font-medium" th:text="${objetivo.titulo}">Título del Objetivo</td>
+                    <td>
+                        <span th:if="${objetivo.impulsador != null}" 
+                              th:text="${objetivo.impulsador.nombre} + ' (Impulsador)'">Impulsador</span>
+                        <span th:if="${objetivo.vendedor != null}" 
+                              th:text="${objetivo.vendedor.nombre} + ' (Vendedor)'">Vendedor</span>
+                    </td>
+                    <td>
+                        <span th:switch="${objetivo.tipo}">
+                            <span th:case="VENTAS_CANTIDAD" class="badge badge-info">Ventas Cantidad</span>
+                            <span th:case="VENTAS_VALOR" class="badge badge-info">Ventas Valor</span>
+                            <span th:case="NUEVOS_CLIENTES" class="badge badge-info">Nuevos Clientes</span>
+                            <span th:case="PRODUCTO_ESPECIFICO" class="badge badge-info">Producto Específico</span>
+                        </span>
+                    </td>
+                    <td>
+                        <div th:if="${objetivo.tipo.name() == 'VENTAS_CANTIDAD'}" class="min-w-40">
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="text-sm font-medium" 
+                                      th:text="${objetivo.progresoVentas} + '/' + ${objetivo.metaVentas}">0/0</span>
+                                <span class="text-xs text-gray-500" 
+                                      th:text="${#numbers.formatDecimal(objetivo.porcentajeCompletado, 1, 1)} + '%'">0%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-500 h-2 rounded-full" 
+                                     th:style="'width: ' + ${objetivo.porcentajeCompletado} + '%;'"
+                                     th:classappend="${objetivo.porcentajeCompletado >= 100} ? 'bg-green-500' : 
+                                                    ${objetivo.porcentajeCompletado >= 50} ? 'bg-yellow-500' : 'bg-red-500'">
+                                </div>
+                            </div>
+                        </div>
+                        <div th:if="${objetivo.tipo.name() == 'VENTAS_VALOR'}" class="min-w-40">
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="text-sm font-medium">
+                                    $<span th:text="${#numbers.formatDecimal(objetivo.progresoValor, 1, 2)}">0</span>/
+                                    $<span th:text="${#numbers.formatDecimal(objetivo.metaValor, 1, 2)}">0</span>
+                                </span>
+                                <span class="text-xs text-gray-500" 
+                                      th:text="${#numbers.formatDecimal(objetivo.porcentajeCompletado, 1, 1)} + '%'">0%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-500 h-2 rounded-full" 
+                                     th:style="'width: ' + ${objetivo.porcentajeCompletado} + '%;'"
+                                     th:classappend="${objetivo.porcentajeCompletado >= 100} ? 'bg-green-500' : 
+                                                    ${objetivo.porcentajeCompletado >= 50} ? 'bg-yellow-500' : 'bg-red-500'">
+                                </div>
+                            </div>
+                        </div>
+                        <div th:if="${objetivo.tipo.name() == 'NUEVOS_CLIENTES'}" class="text-center text-gray-500">
+                            Sin progreso
+                        </div>
+                    </td>
+                    <td>
+                        <span th:switch="${objetivo.estado}" class="badge">
+                            <span th:case="ACTIVO" class="badge badge-success">Activo</span>
+                            <span th:case="COMPLETADO" class="badge badge-primary">Completado</span>
+                            <span th:case="CANCELADO" class="badge badge-error">Cancelado</span>
+                            <span th:case="VENCIDO" class="badge badge-warning">Vencido</span>
+                        </span>
+                    </td>
+                    <td th:text="${#temporals.format(objetivo.fechaFin, 'dd/MM/yyyy')}">31/12/2024</td>
+                    <td class="space-x-2">
+                        <button class="btn btn-xs btn-info">Editar</button>
+                        <button class="btn btn-xs btn-error">Eliminar</button>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(objetivos)}">
+                    <td colspan="7" class="text-center text-gray-500 py-8">
+                        <p class="mb-2">No hay objetivos creados aún</p>
+                        <a th:href="@{/coordinador/objetivos/nuevo}" class="btn btn-primary btn-sm">Crear Primer Objetivo</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Resumen por Impulsador -->
+    <div class="bg-white p-6 shadow rounded-lg">
+        <h3 class="text-lg font-semibold mb-4">Resumen por Impulsador</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div th:each="impulsador : ${impulsadores}" 
+                 class="border border-gray-200 rounded-lg p-4">
+                <h4 class="font-semibold mb-2" th:text="${impulsador.nombre}">Nombre Impulsador</h4>
+                <div class="space-y-2 text-sm">
+                    <div class="flex justify-between">
+                        <span>Objetivos Activos:</span>
+                        <span class="font-medium" 
+                              th:text="${objetivos.?[impulsador.id == impulsador.id and estado.name() == 'ACTIVO'].size()}">0</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Completados:</span>
+                        <span class="font-medium text-green-600"
+                              th:text="${objetivos.?[impulsador.id == impulsador.id and estado.name() == 'COMPLETADO'].size()}">0</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Progreso Promedio:</span>
+                        <span class="font-medium">
+                            <span th:if="${objetivos.?[impulsador.id == impulsador.id].size() > 0}"
+                                  th:text="${#numbers.formatDecimal(
+                                      objetivos.?[impulsador.id == impulsador.id].![porcentajeCompletado].stream()
+                                          .mapToDouble(d -> d).average().orElse(0), 1, 1)} + '%'">0%</span>
+                            <span th:if="${objetivos.?[impulsador.id == impulsador.id].size() == 0}">-</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html data-theme="impulsador" class="bg-base-100" xmlns:th="http://www.thymeleaf.org" style="color-scheme: light;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supervisión de Rutas - Impulsador</title>
+    <link th:href="@{/css/output.css}" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+<div class="navbar bg-primary text-primary-content">
+    <div class="flex-1 px-2 mx-2 font-bold">Panel Impulsador - JSK</div>
+    <div class="flex-none">
+        <a th:href="@{/logout}" class="btn btn-warning btn-sm">Cerrar sesión</a>
+    </div>
+</div>
+
+<div class="p-6">
+    <h1 class="text-2xl font-bold mb-6">Supervisión de Rutas de Mi Equipo</h1>
+
+    <div class="bg-white p-6 shadow rounded-lg">
+        <h3 class="text-lg font-semibold mb-4">Rutas Seleccionadas por Mis Vendedores</h3>
+        <div class="overflow-x-auto">
+            <table class="table table-zebra w-full">
+                <thead>
+                    <tr>
+                        <th>Vendedor</th>
+                        <th>Ruta Seleccionada</th>
+                        <th>Zona</th>
+                        <th>Fecha Selección</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="ruta : ${rutasDeMiEquipo}">
+                        <td th:text="${ruta.vendedor.nombre}">Ana García</td>
+                        <td th:text="${ruta.nombre}">Ruta Norte</td>
+                        <td th:text="${ruta.zona}">Norte</td>
+                        <td th:text="${#temporals.format(ruta.fechaAsignacion, 'dd/MM/yyyy')}">09/11/2024</td>
+                        <td>
+                            <span th:if="${ruta.estado?.name() == 'ASIGNADA'}" class="badge badge-success">En Curso</span>
+                            <span th:if="${ruta.estado?.name() == 'COMPLETADA'}" class="badge badge-primary">Completada</span>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(rutasDeMiEquipo)}">
+                        <td colspan="5" class="text-center text-gray-500 py-4">
+                            Tus vendedores no han seleccionado rutas aún
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

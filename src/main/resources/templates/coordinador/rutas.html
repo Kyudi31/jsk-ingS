@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html data-theme="coordinador" class="bg-base-100" xmlns:th="http://www.thymeleaf.org" style="color-scheme: light;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Rutas - Coordinador</title>
+    <link th:href="@{/css/output.css}" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+<!-- Navbar Unificado -->
+<div class="navbar bg-primary text-primary-content">
+    <div class="flex-1 px-2 mx-2 font-bold">
+        Panel Coordinador - JSK
+    </div>
+    <div class="flex-none">
+        <a th:href="@{/logout}" class="btn btn-warning btn-sm">Cerrar sesión</a>
+    </div>
+</div>
+
+<div class="p-6">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold">Gestión de Rutas</h1>
+        <a th:href="@{/coordinador/rutas/nueva}" class="btn btn-primary">+ Nueva Ruta</a>
+    </div>
+
+    <!-- Métricas Visuales -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="stats shadow bg-white">
+            <div class="stat">
+                <div class="stat-title">Total Rutas</div>
+                <div class="stat-value text-primary" th:text="${totalRutas}">0</div>
+                <div class="stat-desc">Creadas</div>
+            </div>
+        </div>
+        
+        <div class="stats shadow bg-white">
+            <div class="stat">
+                <div class="stat-title">Rutas Asignadas</div>
+                <div class="stat-value text-success" th:text="${rutasAsignadas}">0</div>
+                <div class="stat-desc">A vendedores</div>
+            </div>
+        </div>
+        
+        <div class="stats shadow bg-white">
+            <div class="stat">
+                <div class="stat-title">Disponibles</div>
+                <div class="stat-value text-info" th:text="${rutasDisponibles}">0</div>
+                <div class="stat-desc">Sin asignar</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="overflow-x-auto bg-white p-6 shadow rounded-lg">
+        <table class="table table-zebra w-full">
+            <thead>
+                <tr>
+                    <th>Nombre Ruta</th>
+                    <th>Zona</th>
+                    <th>Impulsador</th>
+                    <th>Vendedor Asignado</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="ruta : ${rutas}">
+                    <td th:text="${ruta.nombre}">Nombre Ruta</td>
+                    <td th:text="${ruta.zona}">Zona</td>
+                    <td>
+                        <span th:if="${ruta.impulsador != null}" th:text="${ruta.impulsador.nombre}">Impulsador</span>
+                        <span th:if="${ruta.impulsador == null}" class="text-gray-500">Sin asignar</span>
+                    </td>
+                    <td>
+                        <span th:if="${ruta.vendedor != null}" th:text="${ruta.vendedor.nombre}">Vendedor</span>
+                        <span th:if="${ruta.vendedor == null}" class="text-gray-500">Disponible</span>
+                    </td>
+                    <td>
+                        <!-- ✅ FORMA CORREGIDA - MÁS SIMPLE -->
+                        <span th:if="${ruta.estado?.name() == 'DISPONIBLE'}" class="badge badge-warning">Disponible</span>
+                        <span th:if="${ruta.estado?.name() == 'ASIGNADA'}" class="badge badge-success">Asignada</span>
+                        <span th:if="${ruta.estado?.name() == 'EN_PROGRESO'}" class="badge badge-info">En Progreso</span>
+                        <span th:if="${ruta.estado?.name() == 'COMPLETADA'}" class="badge badge-primary">Completada</span>
+                    </td>
+                    <td class="space-x-2">
+                        <a th:if="${ruta.vendedor == null}" 
+                           th:href="@{|/coordinador/rutas/eliminar/${ruta.id}|}"
+                           class="btn btn-xs btn-error"
+                           onclick="return confirm('¿Está seguro de eliminar esta ruta?')">Eliminar</a>
+                        <span th:if="${ruta.vendedor != null}" class="text-gray-400 text-xs">Asignada</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

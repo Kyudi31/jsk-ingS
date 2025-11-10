@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" data-theme="vendedor">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Ventas - Vendedor</title>
+    <link th:href="@{/css/output.css}" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+<!-- Navbar Unificado -->
+<div class="navbar bg-primary text-primary-content">
+    <div class="flex-1 px-2 mx-2 font-bold">
+        Panel Vendedor - JSK
+    </div>
+    <div class="flex-none">
+        <a th:href="@{/logout}" class="btn btn-warning btn-sm">Cerrar sesión</a>
+    </div>
+</div>
+
+<div class="p-6">
+    <h1 class="text-2xl font-bold mb-6">Mi Historial de Ventas</h1>
+
+    <!-- Filtros y Resumen -->
+    <div class="bg-white p-6 shadow rounded-lg mb-6">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
+            <div>
+                <h3 class="text-lg font-semibold">Resumen Mensual</h3>
+                <p class="text-gray-600">Noviembre 2024</p>
+            </div>
+            <div class="flex space-x-2">
+                <select class="select select-bordered select-sm">
+                    <option>Noviembre 2024</option>
+                    <option>Octubre 2024</option>
+                    <option>Septiembre 2024</option>
+                </select>
+                <button class="btn btn-primary btn-sm">Exportar</button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="text-center p-3 bg-blue-50 rounded-lg">
+                <p class="text-2xl font-bold text-blue-600">42</p>
+                <p class="text-sm text-gray-600">Ventas Totales</p>
+            </div>
+            <div class="text-center p-3 bg-green-50 rounded-lg">
+                <p class="text-2xl font-bold text-green-600">$1.2M</p>
+                <p class="text-sm text-gray-600">Total Vendido</p>
+            </div>
+            <div class="text-center p-3 bg-purple-50 rounded-lg">
+                <p class="text-2xl font-bold text-purple-600">28.5</p>
+                <p class="text-sm text-gray-600">Promedio/Venta</p>
+            </div>
+            <div class="text-center p-3 bg-orange-50 rounded-lg">
+                <p class="text-2xl font-bold text-orange-600">78%</p>
+                <p class="text-sm text-gray-600">Objetivo</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Historial Detallado -->
+    <div class="bg-white p-6 shadow rounded-lg">
+        <h3 class="text-lg font-semibold mb-4">Detalle de Ventas</h3>
+        <div class="overflow-x-auto">
+            <table class="table table-zebra w-full">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Cliente</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Valor Unitario</th>
+                        <th>Total</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-medium">09 Nov 2024</td>
+                        <td>Tienda La Esperanza</td>
+                        <td>Producto A</td>
+                        <td>5 unidades</td>
+                        <td>$25,000</td>
+                        <td class="font-bold text-green-600">$125,000</td>
+                        <td><span class="badge badge-success">Completada</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium">08 Nov 2024</td>
+                        <td>Supermercado Central</td>
+                        <td>Producto B</td>
+                        <td>3 unidades</td>
+                        <td>$28,333</td>
+                        <td class="font-bold text-green-600">$85,000</td>
+                        <td><span class="badge badge-success">Completada</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium">07 Nov 2024</td>
+                        <td>MiniMarket Express</td>
+                        <td>Producto C</td>
+                        <td>8 unidades</td>
+                        <td>$26,250</td>
+                        <td class="font-bold text-green-600">$210,000</td>
+                        <td><span class="badge badge-success">Completada</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium">06 Nov 2024</td>
+                        <td>Distribuidora Norte</td>
+                        <td>Producto A</td>
+                        <td>4 unidades</td>
+                        <td>$25,000</td>
+                        <td class="font-bold text-green-600">$100,000</td>
+                        <td><span class="badge badge-success">Completada</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium">05 Nov 2024</td>
+                        <td>Almacén Don Pedro</td>
+                        <td>Producto D</td>
+                        <td>6 unidades</td>
+                        <td>$30,000</td>
+                        <td class="font-bold text-green-600">$180,000</td>
+                        <td><span class="badge badge-success">Completada</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium">04 Nov 2024</td>
+                        <td>Bodega El Ahorro</td>
+                        <td>Producto B</td>
+                        <td>2 unidades</td>
+                        <td>$28,333</td>
+                        <td class="font-bold text-green-600">$56,666</td>
+                        <td><span class="badge badge-success">Completada</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Paginación -->
+        <div class="flex justify-center mt-6">
+            <div class="join">
+                <button class="join-item btn btn-sm">«</button>
+                <button class="join-item btn btn-sm btn-active">1</button>
+                <button class="join-item btn btn-sm">2</button>
+                <button class="join-item btn btn-sm">3</button>
+                <button class="join-item btn btn-sm">»</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

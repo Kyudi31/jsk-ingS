@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html data-theme="impulsador" class="bg-base-100" xmlns:th="http://www.thymeleaf.org" style="color-scheme: light;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Objetivos - Impulsador</title>
+    <link th:href="@{/css/output.css}" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+<!-- Navbar Unificado -->
+<div class="navbar bg-primary text-primary-content">
+    <div class="flex-1 px-2 mx-2 font-bold">
+        Panel Impulsador - JSK
+    </div>
+    <div class="flex-none">
+        <a th:href="@{/logout}" class="btn btn-warning btn-sm">Cerrar sesión</a>
+    </div>
+</div>
+
+<div class="p-6">
+    <h1 class="text-2xl font-bold mb-6">Mis Objetivos</h1>
+
+    <!-- Métricas Personales -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="stats shadow bg-white">
+            <div class="stat">
+                <div class="stat-title">Objetivo Mensual</div>
+                <div class="stat-value text-primary">150</div>
+                <div class="stat-desc">Ventas objetivo</div>
+            </div>
+        </div>
+        
+        <div class="stats shadow bg-white">
+            <div class="stat">
+                <div class="stat-title">Alcanzado</div>
+                <div class="stat-value text-success">128</div>
+                <div class="stat-desc">Ventas realizadas</div>
+            </div>
+        </div>
+        
+        <div class="stats shadow bg-white">
+            <div class="stat">
+                <div class="stat-title">Progreso</div>
+                <div class="stat-value text-info">85%</div>
+                <div class="stat-desc">Del objetivo</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progreso Visual -->
+    <div class="bg-white p-6 shadow rounded-lg mb-6">
+        <h3 class="text-lg font-semibold mb-4">Progreso del Objetivo Mensual</h3>
+        <div class="w-full bg-gray-200 rounded-full h-6 mb-2">
+            <div class="bg-green-500 h-6 rounded-full flex items-center justify-center" style="width: 85%">
+                <span class="text-white text-sm font-bold">85% Completado</span>
+            </div>
+        </div>
+        <div class="flex justify-between text-sm text-gray-600">
+            <span>0</span>
+            <span>150 ventas</span>
+        </div>
+    </div>
+
+    <!-- Objetivos de Mi Equipo -->
+    <div class="bg-white p-6 shadow rounded-lg">
+        <h3 class="text-lg font-semibold mb-4">Objetivos de Mi Equipo</h3>
+        <div class="overflow-x-auto">
+            <table class="table table-zebra w-full">
+                <thead>
+                    <tr>
+                        <th>Vendedor</th>
+                        <th>Objetivo</th>
+                        <th>Progreso</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ana García</td>
+                        <td>80 ventas</td>
+                        <td>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-16 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-green-500 h-2 rounded-full" style="width: 90%"></div>
+                                </div>
+                                <span class="text-sm">90%</span>
+                            </div>
+                        </td>
+                        <td><span class="badge badge-success">Excelente</span></td>
+                    </tr>
+                    <tr>
+                        <td>Luis Martínez</td>
+                        <td>70 ventas</td>
+                        <td>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-16 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-yellow-500 h-2 rounded-full" style="width: 65%"></div>
+                                </div>
+                                <span class="text-sm">65%</span>
+                            </div>
+                        </td>
+                        <td><span class="badge badge-warning">En Progreso</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html data-theme="coordinador" class="bg-base-100" xmlns:th="http://www.thymeleaf.org" style="color-scheme: light;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Impulsador</title>
+    <link th:href="@{/css/output.css}" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+<!-- Navbar Unificado -->
+<div class="navbar bg-primary text-primary-content">
+    <div class="flex-1 px-2 mx-2 font-bold">
+        Panel Coordinador - JSK
+    </div>
+    <div class="flex-none">
+        <a th:href="@{/logout}" class="btn btn-warning btn-sm">Cerrar sesión</a>
+    </div>
+</div>
+
+<div class="p-6 max-w-lg mx-auto">
+    <div class="bg-white p-6 shadow rounded-lg">
+        <h2 class="text-2xl font-bold mb-6">Nuevo Impulsador</h2>
+
+        <form th:object="${impulsador}" th:action="@{/coordinador/impulsadores/guardar}" method="POST">
+            <div class="form-control mb-4">
+                <label class="label">
+                    <span class="label-text font-semibold">Documento de Identidad</span>
+                </label>
+                <input th:field="*{documentoIdentidad}" type="text" class="input input-bordered w-full" required>
+            </div>
+
+            <div class="form-control mb-4">
+                <label class="label">
+                    <span class="label-text font-semibold">Nombre Completo</span>
+                </label>
+                <input th:field="*{nombre}" type="text" class="input input-bordered w-full" required>
+            </div>
+
+            <div class="form-control mb-6">
+                <label class="label">
+                    <span class="label-text font-semibold">Contraseña</span>
+                </label>
+                <input th:field="*{password}" type="password" class="input input-bordered w-full" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-full">Crear Impulsador</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

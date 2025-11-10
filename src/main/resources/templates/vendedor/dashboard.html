@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="vendedor">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Vendedor</title>
+    <link rel="stylesheet" th:href="@{/css/output.css}">
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+<!-- Navbar Simple -->
+<div class="navbar bg-primary text-primary-content shadow-lg">
+    <div class="flex-1 px-2 mx-2 font-bold">
+        Panel Vendedor - JSK
+    </div>
+    <div class="flex-none">
+        <span class="text-sm mr-4">Bienvenido Vendedor</span>
+        <a th:href="@{/logout}" class="btn btn-warning btn-sm">Cerrar sesión</a>
+    </div>
+</div>
+
+<!-- Contenido Principal -->
+<div class="p-6">
+    <h1 class="text-2xl font-bold mb-6">Mi Panel de Ventas</h1>
+
+    <!-- Grid de Acciones Básicas -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+        <!-- Registrar Venta -->
+        <a th:href="@{/vendedor/registrar-venta}" class="card bg-white shadow hover:shadow-lg p-4">
+            <h2 class="font-semibold text-lg">Registrar Venta</h2>
+            <p class="text-gray-600">Ingresar nueva venta realizada</p>
+        </a>
+
+        <!-- Mis Rutas -->
+        <a th:href="@{/vendedor/rutas}" class="card bg-white shadow hover:shadow-lg p-4">
+            <h2 class="font-semibold text-lg">Mis Rutas</h2>
+            <p class="text-gray-600">Gestionar y seleccionar rutas</p>
+        </a>
+
+        <!-- Historial de Ventas -->
+        <a th:href="@{/vendedor/historial}" class="card bg-white shadow hover:shadow-lg p-4">
+            <h2 class="font-semibold text-lg">Historial</h2>
+            <p class="text-gray-600">Ver mis ventas registradas</p>
+        </a>
+
+        <!-- Mis Objetivos -->
+        <a th:href="@{/vendedor/objetivos}" class="card bg-white shadow hover:shadow-lg p-4">
+            <h2 class="font-semibold text-lg">Mis Objetivos</h2>
+            <p class="text-gray-600">Seguimiento de metas</p>
+        </a>
+
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html data-theme="impulsador" class="bg-base-100" xmlns:th="http://www.thymeleaf.org" style="color-scheme: light;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendedores - Impulsador</title>
+    <link th:href="@{/css/output.css}" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+<!-- Navbar Unificado -->
+<div class="navbar bg-primary text-primary-content">
+    <div class="flex-1 px-2 mx-2 font-bold">
+        Panel Impulsador - JSK
+    </div>
+    <div class="flex-none">
+        <a th:href="@{/logout}" class="btn btn-warning btn-sm">Cerrar sesión</a>
+    </div>
+</div>
+
+<div class="p-6">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold">Vendedores</h1>
+        <a th:href="@{/impulsador/vendedores/nuevo}" class="btn btn-primary">+ Nuevo Vendedor</a>
+    </div>
+
+    <div class="overflow-x-auto bg-white p-6 shadow rounded-lg">
+        <table class="table table-zebra w-full">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Documento</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="v : ${vendedores}">
+                    <td th:text="${v.nombre}"></td>
+                    <td th:text="${v.documentoIdentidad}"></td>
+                    <td>
+                        <span th:if="${v.activo}" class="badge badge-success">Activo</span>
+                        <span th:unless="${v.activo}" class="badge badge-error">Inactivo</span>
+                    </td>
+                    <td class="space-x-2">
+                        <a th:href="@{|/impulsador/vendedores/desactivar/${v.id}|}"
+                           class="btn btn-xs btn-error"
+                           th:if="${v.activo}">Desactivar</a>
+                        <a th:href="@{|/impulsador/vendedores/activar/${v.id}|}"
+                           class="btn btn-xs btn-success"
+                           th:unless="${v.activo}">Activar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

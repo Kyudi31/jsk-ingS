@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" data-theme="admin" style="color-scheme: light;" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coordinadores - Admin</title>
+    <link th:href="@{/css/output.css}" rel="stylesheet">
+</head>
+<body class="bg-base-100 min-h-screen">
+
+<!-- Navbar con tema admin -->
+<div class="navbar bg-primary text-primary-content shadow-lg">
+    <div class="flex-1 px-2 mx-2 font-bold text-lg">
+        Panel Admin - JSK
+    </div>
+    <div class="flex-none">
+        <a th:href="@{/logout}" class="btn btn-warning btn-sm">Cerrar sesión</a>
+    </div>
+</div>
+
+<div class="p-6">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold text-base-content">Coordinadores</h1>
+        <a th:href="@{/admin/coordinadores/nuevo}" class="btn btn-primary">+ Nuevo Coordinador</a>
+    </div>
+
+    <div class="overflow-x-auto bg-base-100 p-6 shadow rounded-lg border border-base-300">
+        <table class="table table-zebra w-full">
+            <thead>
+                <tr>
+                    <th class="text-base-content">Nombre</th>
+                    <th class="text-base-content">Zona</th>
+                    <th class="text-base-content">Empresa</th>
+                    <th class="text-base-content">Estado</th>
+                    <th class="text-base-content">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="c : ${coordinadores}">
+                    <td th:text="${c.nombre}" class="text-base-content"></td>
+                    <td th:text="${c.zona}" class="text-base-content"></td>
+                    <td th:text="${c.empresa}" class="text-base-content"></td>
+                    <td>
+                        <span th:if="${c.activo}" class="badge badge-success">Activo</span>
+                        <span th:unless="${c.activo}" class="badge badge-error">Inactivo</span>
+                    </td>
+                    <td class="space-x-2">
+                        <a th:href="@{|/admin/coordinadores/desactivar/${c.id}|}"
+                           class="btn btn-xs btn-error"
+                           th:if="${c.activo}">Desactivar</a>
+                        <a th:href="@{|/admin/coordinadores/activar/${c.id}|}"
+                           class="btn btn-xs btn-success"
+                           th:unless="${c.activo}">Activar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

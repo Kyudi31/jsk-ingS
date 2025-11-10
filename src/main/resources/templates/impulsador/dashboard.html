@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html data-theme="impulsador" class="bg-base-100" xmlns:th="http://www.thymeleaf.org" style="color-scheme: light;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Impulsador</title>
+    <link rel="stylesheet" th:href="@{/css/output.css}">
+
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+<!-- Navbar Unificado -->
+<div class="navbar bg-primary text-primary-content shadow-lg">
+    <div class="flex-1 px-2 mx-2 font-bold">
+        Panel Impulsador - JSK
+    </div>
+    <div class="flex-none">
+        <a th:href="@{/logout}" class="btn btn-warning btn-sm">Cerrar sesión</a>
+    </div>
+</div>
+
+<div class="p-6">
+    <h1 class="text-2xl font-bold mb-6">Bienvenido Impulsador</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <a th:href="@{/impulsador/vendedores}" class="card bg-white shadow hover:shadow-lg p-4">
+            <h2 class="font-semibold text-lg">Vendedores</h2>
+            <p class="text-gray-600">Gestionar vendedores asignados</p>
+        </a>
+
+        <a th:href="@{/impulsador/ventas}" class="card bg-white shadow hover:shadow-lg p-4">
+            <h2 class="font-semibold text-lg">Ventas</h2>
+            <p class="text-gray-600">Ver ventas de tu equipo</p>
+        </a>
+
+        <a th:href="@{/impulsador/supervision-rutas}" class="card bg-white shadow hover:shadow-lg p-4">
+            <h2 class="font-semibold text-lg">Supervisión Rutas</h2>
+            <p class="text-gray-600">Supervisar rutas a los vendedores</p>
+        </a>
+
+
+        <a th:href="@{/impulsador/objetivos}" class="card bg-white shadow hover:shadow-lg p-4">
+            <h2 class="font-semibold text-lg">Objetivos</h2>
+            <p class="text-gray-600">Objetivos y metas del mes</p>
+        </a>
+    </div>
+</div>
+</body>
+</html>

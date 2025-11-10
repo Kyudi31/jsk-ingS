@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Panel Vendedor</title>
+    
+    <link href="/css/output.css" rel="stylesheet">
+
+    <style>
+        .sidebar-slide {
+            transition: transform .25s ease-in-out;
+        }
+        .nav-link:hover {
+            background-color: rgba(34, 197, 94, 0.15); /* green-500 low opacity */
+            box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen flex">
+
+<!-- ✅ Sidebar -->
+<aside class="w-56 bg-green-600 text-white sidebar-slide">
+    <div class="p-4 text-xl font-bold border-b border-green-500">
+        Vendedor
+    </div>
+
+    <nav class="p-3 space-y-1">
+        <a th:href="@{/vendedor/dashboard}" class="nav-link flex items-center gap-2 p-2 rounded-lg">
+            📊 Dashboard
+        </a>
+        <a th:href="@{/vendedor/registrar-venta}" class="nav-link flex items-center gap-2 p-2 rounded-lg">
+            📝 Registrar Venta
+        </a>
+        <a th:href="@{/vendedor/rutas}" class="nav-link flex items-center gap-2 p-2 rounded-lg">
+            🛣️ Mis Rutas
+        </a>
+        <a th:href="@{/vendedor/historial}" class="nav-link flex items-center gap-2 p-2 rounded-lg">
+            📂 Historial
+        </a>
+        <a th:href="@{/vendedor/objetivos}" class="nav-link flex items-center gap-2 p-2 rounded-lg">
+            🎯 Objetivos
+        </a>
+    </nav>
+</aside>
+
+<!-- ✅ Main -->
+<div class="flex-1 flex flex-col">
+
+    <!-- 🧠 Header -->
+    <header class="flex justify-between bg-white shadow px-6 py-4 items-center">
+        <div>
+            <h1 class="text-xl font-bold" th:text="${title}">Panel Vendedor</h1>
+            <p class="text-xs text-gray-500" th:text="${breadcrumb}">Inicio</p>
+        </div>
+
+        <a th:href="@{/logout}" class="btn btn-warning btn-sm">Salir</a>
+    </header>
+
+    <!-- 📦 Page Content -->
+    <main class="p-6" th:fragment="content"></main>
+</div>
+
+</body>
+</html>

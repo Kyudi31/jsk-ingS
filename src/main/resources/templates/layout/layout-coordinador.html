@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Panel Coordinador</title>
+
+    <link href="/css/output.css" rel="stylesheet">
+
+    <!-- Animación sidebar -->
+    <style>
+        .sidebar-slide {
+            transition: transform .25s ease-in-out;
+        }
+        .nav-link:hover {
+            background-color: rgba(37, 99, 235, 0.15);
+            box-shadow: 0 0 8px rgba(37, 99, 235, 0.4);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex">
+
+<!-- ✅ Sidebar -->
+<aside id="sidebar" class="w-60 bg-blue-800 text-white sidebar-slide">
+    <div class="p-4 text-xl font-bold border-b border-blue-700">
+        Coordinador
+    </div>
+
+    <nav class="p-3 space-y-1">
+        <a th:href="@{/coordinador/dashboard}" class="nav-link flex items-center gap-2 p-2 rounded-lg">
+            📊 Dashboard
+        </a>
+        <a th:href="@{/coordinador/impulsadores}" class="nav-link flex items-center gap-2 p-2 rounded-lg">
+            👥 Impulsadores
+        </a>
+        <a th:href="@{/coordinador/rutas}" class="nav-link flex items-center gap-2 p-2 rounded-lg">
+            🛣️ Rutas
+        </a>
+        <a th:href="@{/coordinador/objetivos}" class="nav-link flex items-center gap-2 p-2 rounded-lg">
+            🎯 Objetivos
+        </a>
+    </nav>
+</aside>
+
+<!-- ✅ Contenido -->
+<div class="flex-1">
+
+    <!-- Top bar -->
+    <header class="flex justify-between bg-white shadow px-6 py-4 items-center">
+        <div>
+            <h1 class="text-xl font-bold" th:text="${title}">Panel Coordinador</h1>
+            <p class="text-sm text-gray-500" th:text="${breadcrumb}">Inicio</p>
+        </div>
+
+        <a th:href="@{/logout}" class="btn btn-error btn-sm">Salir</a>
+    </header>
+
+    <!-- Page content -->
+    <main class="p-6" th:fragment="content">
+        <!-- Aquí se inserta el contenido real -->
+    </main>
+</div>
+
+</body>
+</html>

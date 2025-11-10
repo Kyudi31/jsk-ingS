@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="vendedor" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Venta - Vendedor</title>
+    <link th:href="@{/css/output.css}" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+<!-- Navbar Unificado -->
+<div class="navbar bg-primary text-primary-content">
+    <div class="flex-1 px-2 mx-2 font-bold">
+        Panel Vendedor - JSK
+    </div>
+    <div class="flex-none">
+        <a th:href="@{/logout}" class="btn btn-warning btn-sm">Cerrar sesión</a>
+    </div>
+</div>
+
+<div class="p-6 max-w-2xl mx-auto">
+    <div class="bg-white p-6 shadow rounded-lg">
+        <h1 class="text-2xl font-bold mb-6">Registrar Nueva Venta</h1>
+
+        <form th:action="@{/vendedor/ventas/guardar}" method="POST">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Cliente</span>
+                    </label>
+                    <input type="text" name="cliente" class="input input-bordered w-full" placeholder="Nombre del cliente" required>
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Tipo de Cliente</span>
+                    </label>
+                    <select name="tipoCliente" class="select select-bordered w-full" required>
+                        <option value="" disabled selected>Seleccione tipo</option>
+                        <option value="TIENDA">Tienda</option>
+                        <option value="SUPERMERCADO">Supermercado</option>
+                        <option value="DISTRIBUIDOR">Distribuidor</option>
+                        <option value="MINIMARKET">MiniMarket</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-control mb-4">
+                <label class="label">
+                    <span class="label-text font-semibold">Producto</span>
+                </label>
+                <select name="producto" class="select select-bordered w-full" required>
+                    <option value="" disabled selected>Seleccione producto</option>
+                    <option value="PRODUCTO_A">Producto A</option>
+                    <option value="PRODUCTO_B">Producto B</option>
+                    <option value="PRODUCTO_C">Producto C</option>
+                    <option value="PRODUCTO_D">Producto D</option>
+                </select>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Cantidad</span>
+                    </label>
+                    <input type="number" name="cantidad" class="input input-bordered w-full" placeholder="0" min="1" required>
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Precio Unitario</span>
+                    </label>
+                    <input type="number" name="precioUnitario" class="input input-bordered w-full" placeholder="$0" min="0" required>
+                </div>
+            </div>
+
+            <div class="form-control mb-6">
+                <label class="label">
+                    <span class="label-text font-semibold">Observaciones</span>
+                </label>
+                <textarea name="observaciones" class="textarea textarea-bordered w-full" placeholder="Observaciones adicionales..." rows="3"></textarea>
+            </div>
+
+            <!-- Resumen de Venta -->
+            <div class="bg-blue-50 p-4 rounded-lg mb-6">
+                <h3 class="font-semibold text-lg mb-2">Resumen de Venta</h3>
+                <div class="flex justify-between items-center">
+                    <span>Total calculado:</span>
+                    <span class="text-xl font-bold text-blue-600" id="totalVenta">$0</span>
+                </div>
+            </div>
+
+            <div class="flex space-x-4">
+                <a th:href="@{/vendedor/dashboard}" class="btn btn-ghost border border-gray-300 flex-1">Cancelar</a>
+                <button type="submit" class="btn btn-primary flex-1">Registrar Venta</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Script simple para calcular total
+    document.addEventListener('DOMContentLoaded', function() {
+        const cantidadInput = document.querySelector('input[name="cantidad"]');
+        const precioInput = document.querySelector('input[name="precioUnitario"]');
+        const totalSpan = document.getElementById('totalVenta');
+        
+        function calcularTotal() {
+            const cantidad = parseInt(cantidadInput.value) || 0;
+            const precio = parseInt(precioInput.value) || 0;
+            const total = cantidad * precio;
+            totalSpan.textContent = '$' + total.toLocaleString();
+        }
+        
+        cantidadInput.addEventListener('input', calcularTotal);
+        precioInput.addEventListener('input', calcularTotal);
+    });
+</script>
+</body>
+</html>

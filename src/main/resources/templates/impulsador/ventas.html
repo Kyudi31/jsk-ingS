@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html data-theme="impulsador" class="bg-base-100" xmlns:th="http://www.thymeleaf.org" style="color-scheme: light;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ventas del Equipo - Impulsador</title>
+    <link th:href="@{/css/output.css}" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+<!-- Navbar Unificado -->
+<div class="navbar bg-primary text-primary-content">
+    <div class="flex-1 px-2 mx-2 font-bold">
+        Panel Impulsador - JSK
+    </div>
+    <div class="flex-none">
+        <a th:href="@{/logout}" class="btn btn-warning btn-sm">Cerrar sesión</a>
+    </div>
+</div>
+
+<div class="p-6">
+    <h1 class="text-2xl font-bold mb-6">Ventas de Mi Equipo</h1>
+
+    <!-- Métricas del Equipo -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div class="stats shadow bg-white">
+            <div class="stat">
+                <div class="stat-title">Ventas Hoy</div>
+                <div class="stat-value text-primary">24</div>
+                <div class="stat-desc">+5 vs ayer</div>
+            </div>
+        </div>
+        
+        <div class="stats shadow bg-white">
+            <div class="stat">
+                <div class="stat-title">Total Mes</div>
+                <div class="stat-value text-success">428</div>
+                <div class="stat-desc">Ventas acumuladas</div>
+            </div>
+        </div>
+        
+        <div class="stats shadow bg-white">
+            <div class="stat">
+                <div class="stat-title">Valor Total</div>
+                <div class="stat-value text-info">$10.7M</div>
+                <div class="stat-desc">Ingresos mes</div>
+            </div>
+        </div>
+
+        <div class="stats shadow bg-white">
+            <div class="stat">
+                <div class="stat-title">Mejor Vendedor</div>
+                <div class="stat-value text-secondary">Ana G.</div>
+                <div class="stat-desc">45 ventas</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resumen por Vendedor -->
+    <div class="bg-white p-6 shadow rounded-lg mb-6">
+        <h3 class="text-lg font-semibold mb-4">Desempeño por Vendedor</h3>
+        <div class="overflow-x-auto">
+            <table class="table table-zebra w-full">
+                <thead>
+                    <tr>
+                        <th>Vendedor</th>
+                        <th>Ventas Hoy</th>
+                        <th>Ventas Semana</th>
+                        <th>Ventas Mes</th>
+                        <th>Total Vendido</th>
+                        <th>Rendimiento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-medium">Ana García</td>
+                        <td>8</td>
+                        <td>45</td>
+                        <td>156</td>
+                        <td>$3.9M</td>
+                        <td><span class="badge badge-success">+15%</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium">Luis Martínez</td>
+                        <td>6</td>
+                        <td>32</td>
+                        <td>128</td>
+                        <td>$3.2M</td>
+                        <td><span class="badge badge-warning">+5%</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium">Carlos Ruiz</td>
+                        <td>5</td>
+                        <td>28</td>
+                        <td>98</td>
+                        <td>$2.4M</td>
+                        <td><span class="badge badge-error">-2%</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium">María Torres</td>
+                        <td>5</td>
+                        <td>30</td>
+                        <td>112</td>
+                        <td>$2.8M</td>
+                        <td><span class="badge badge-warning">+3%</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Ventas Recientes -->
+    <div class="bg-white p-6 shadow rounded-lg">
+        <h3 class="text-lg font-semibold mb-4">Ventas Recientes</h3>
+        <div class="overflow-x-auto">
+            <table class="table table-zebra w-full">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Vendedor</th>
+                        <th>Cliente</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>09 Nov 2024</td>
+                        <td>Ana García</td>
+                        <td>Tienda La Esperanza</td>
+                        <td>Producto A</td>
+                        <td>5 unidades</td>
+                        <td class="font-medium">$125,000</td>
+                    </tr>
+                    <tr>
+                        <td>09 Nov 2024</td>
+                        <td>Luis Martínez</td>
+                        <td>Supermercado Central</td>
+                        <td>Producto B</td>
+                        <td>3 unidades</td>
+                        <td class="font-medium">$85,000</td>
+                    </tr>
+                    <tr>
+                        <td>08 Nov 2024</td>
+                        <td>Carlos Ruiz</td>
+                        <td>MiniMarket Express</td>
+                        <td>Producto C</td>
+                        <td>8 unidades</td>
+                        <td class="font-medium">$210,000</td>
+                    </tr>
+                    <tr>
+                        <td>08 Nov 2024</td>
+                        <td>María Torres</td>
+                        <td>Distribuidora Norte</td>
+                        <td>Producto A</td>
+                        <td>4 unidades</td>
+                        <td class="font-medium">$100,000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html data-theme="coordinador" class="bg-base-100" xmlns:th="http://www.thymeleaf.org" style="color-scheme: light;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Objetivo - Coordinador</title>
+    <link th:href="@{/css/output.css}" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+<!-- Navbar Unificado -->
+<div class="navbar bg-primary text-primary-content">
+    <div class="flex-1 px-2 mx-2 font-bold">
+        Panel Coordinador - JSK
+    </div>
+    <div class="flex-none">
+        <a th:href="@{/logout}" class="btn btn-warning btn-sm">Cerrar sesión</a>
+    </div>
+</div>
+
+<div class="p-6 max-w-2xl mx-auto">
+    <div class="bg-white p-6 shadow rounded-lg">
+        <h1 class="text-2xl font-bold mb-6">Crear Nuevo Objetivo</h1>
+
+        <form th:action="@{/coordinador/objetivos/guardar}" method="POST">
+            <!-- Información Básica -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Título del Objetivo</span>
+                    </label>
+                    <input type="text" name="titulo" class="input input-bordered w-full" 
+                           placeholder="Ej: Meta de Ventas Noviembre" required>
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Tipo de Objetivo</span>
+                    </label>
+                    <select name="tipo" class="select select-bordered w-full" required>
+                        <option value="" disabled selected>Seleccione tipo</option>
+                        <option value="VENTAS_CANTIDAD">Cantidad de Ventas</option>
+                        <option value="VENTAS_VALOR">Valor de Ventas</option>
+                        <option value="NUEVOS_CLIENTES">Nuevos Clientes</option>
+                        <option value="PRODUCTO_ESPECIFICO">Producto Específico</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Destinatario -->
+            <div class="form-control mb-4">
+                <label class="label">
+                    <span class="label-text font-semibold">Seleccionar Impulsador</span>
+                </label>
+                <select name="destinatarioId" class="select select-bordered w-full" required>
+                    <option value="" disabled selected>Seleccione un impulsador</option>
+                    <option th:each="impulsador : ${impulsadores}" 
+                            th:value="${impulsador.id}" 
+                            th:text="${impulsador.nombre}">
+                    </option>
+                </select>
+            </div>
+
+            <!-- Metas -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Meta de Ventas (Cantidad)</span>
+                    </label>
+                    <input type="number" name="metaVentas" class="input input-bordered w-full" 
+                           placeholder="0" min="1">
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Meta de Valor ($)</span>
+                    </label>
+                    <input type="number" name="metaValor" class="input input-bordered w-full" 
+                           placeholder="0" min="0" step="0.01">
+                </div>
+            </div>
+
+            <!-- Fechas -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Fecha Inicio</span>
+                    </label>
+                    <input type="date" name="fechaInicio" class="input input-bordered w-full" required>
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Fecha Fin</span>
+                    </label>
+                    <input type="date" name="fechaFin" class="input input-bordered w-full" required>
+                </div>
+            </div>
+
+            <!-- Descripción -->
+            <div class="form-control mb-6">
+                <label class="label">
+                    <span class="label-text font-semibold">Descripción</span>
+                </label>
+                <textarea name="descripcion" class="textarea textarea-bordered w-full" 
+                         placeholder="Describe el objetivo, condiciones, incentivos, etc..." 
+                         rows="4" required></textarea>
+            </div>
+
+            <div class="flex space-x-4">
+                <a th:href="@{/coordinador/objetivos}" class="btn btn-ghost border border-gray-300 flex-1">Cancelar</a>
+                <button type="submit" class="btn btn-primary flex-1">Crear Objetivo</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Establecer fechas por defecto
+        const hoy = new Date().toISOString().split('T')[0];
+        const finMes = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).toISOString().split('T')[0];
+        
+        const fechaInicioInput = document.querySelector('input[name="fechaInicio"]');
+        const fechaFinInput = document.querySelector('input[name="fechaFin"]');
+        
+        fechaInicioInput.value = hoy;
+        fechaFinInput.value = finMes;
+    });
+</script>
+</body>
+</html>

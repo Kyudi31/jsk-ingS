@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="vendedor" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Objetivos - Vendedor</title>
+    <link th:href="@{/css/output.css}" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+<!-- Navbar Unificado -->
+<div class="navbar bg-primary text-primary-content">
+    <div class="flex-1 px-2 mx-2 font-bold">
+        Panel Vendedor - JSK
+    </div>
+    <div class="flex-none">
+        <a th:href="@{/logout}" class="btn btn-warning btn-sm">Cerrar sesión</a>
+    </div>
+</div>
+
+<div class="p-6">
+    <h1 class="text-2xl font-bold mb-6">Mis Objetivos</h1>
+
+    <!-- Resumen de Objetivos -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="stats shadow bg-white">
+            <div class="stat">
+                <div class="stat-title">Objetivo Mensual</div>
+                <div class="stat-value text-primary">80</div>
+                <div class="stat-desc">Ventas objetivo</div>
+            </div>
+        </div>
+        
+        <div class="stats shadow bg-white">
+            <div class="stat">
+                <div class="stat-title">Alcanzado</div>
+                <div class="stat-value text-success">62</div>
+                <div class="stat-desc">Ventas realizadas</div>
+            </div>
+        </div>
+        
+        <div class="stats shadow bg-white">
+            <div class="stat">
+                <div class="stat-title">Progreso</div>
+                <div class="stat-value text-info">78%</div>
+                <div class="stat-desc">Del objetivo</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progreso Principal -->
+    <div class="bg-white p-6 shadow rounded-lg mb-6">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-semibold">Objetivo Mensual - Ventas</h3>
+            <span class="badge badge-warning">22 días restantes</span>
+        </div>
+        
+        <div class="w-full bg-gray-200 rounded-full h-6 mb-3">
+            <div class="bg-gradient-to-r from-blue-500 to-green-500 h-6 rounded-full flex items-center justify-center" style="width: 78%">
+                <span class="text-white text-sm font-bold">78% Completado</span>
+            </div>
+        </div>
+        
+        <div class="flex justify-between text-sm text-gray-600 mb-2">
+            <span>0 ventas</span>
+            <span>62/80 ventas</span>
+            <span>80 ventas</span>
+        </div>
+        
+        <div class="text-center">
+            <p class="text-lg font-semibold text-green-600">¡Vas muy bien! Solo 18 ventas para alcanzar tu meta</p>
+        </div>
+    </div>
+
+    <!-- Desglose por Semana -->
+    <div class="bg-white p-6 shadow rounded-lg mb-6">
+        <h3 class="text-lg font-semibold mb-4">Progreso Semanal</h3>
+        <div class="space-y-4">
+            <div>
+                <div class="flex justify-between mb-1">
+                    <span class="font-medium">Semana 1 (1-7 Nov)</span>
+                    <span class="text-sm font-semibold">15/20 ventas</span>
+                </div>
+                <progress class="progress progress-success w-full" value="75" max="100"></progress>
+            </div>
+            
+            <div>
+                <div class="flex justify-between mb-1">
+                    <span class="font-medium">Semana 2 (8-14 Nov)</span>
+                    <span class="text-sm font-semibold">18/20 ventas</span>
+                </div>
+                <progress class="progress progress-success w-full" value="90" max="100"></progress>
+            </div>
+            
+            <div>
+                <div class="flex justify-between mb-1">
+                    <span class="font-medium">Semana 3 (15-21 Nov)</span>
+                    <span class="text-sm font-semibold">12/20 ventas</span>
+                </div>
+                <progress class="progress progress-warning w-full" value="60" max="100"></progress>
+            </div>
+            
+            <div>
+                <div class="flex justify-between mb-1">
+                    <span class="font-medium">Semana 4 (22-30 Nov)</span>
+                    <span class="text-sm font-semibold">17/20 ventas</span>
+                </div>
+                <progress class="progress progress-success w-full" value="85" max="100"></progress>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recompensas e Incentivos -->
+    <div class="bg-white p-6 shadow rounded-lg">
+        <h3 class="text-lg font-semibold mb-4">Incentivos y Recompensas</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="border border-yellow-200 rounded-lg p-4 bg-yellow-50">
+                <div class="flex items-center space-x-3 mb-2">
+                    <div class="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold">🥇</span>
+                    </div>
+                    <h4 class="font-semibold">Meta 80+ Ventas</h4>
+                </div>
+                <p class="text-sm text-gray-600 mb-2">Bono de $500,000 + Reconocimiento</p>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="bg-yellow-500 h-2 rounded-full" style="width: 78%"></div>
+                </div>
+            </div>
+            
+            <div class="border border-purple-200 rounded-lg p-4 bg-purple-50">
+                <div class="flex items-center space-x-3 mb-2">
+                    <div class="w-8 h-8 bg-purple-400 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold">⭐</span>
+                    </div>
+                    <h4 class="font-semibold">Vendedor del Mes</h4>
+                </div>
+                <p class="text-sm text-gray-600 mb-2">Top 3 vendedores reciben premio especial</p>
+                <div class="text-center">
+                    <span class="badge badge-primary">Posición actual: #2</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
