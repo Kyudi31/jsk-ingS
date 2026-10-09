@@ -20,29 +20,28 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-         String[] roles = {"ADMIN", "COORDINADOR", "IMPULSADOR", "VENDEDOR"};
+        String[] roles = { "ADMIN", "COORDINADOR", "IMPULSADOR", "VENDEDOR" };
         for (String r : roles) {
             rolRepository.findByNombre(r)
-                .orElseGet(() -> {
-                    Rol nuevo = new Rol();
-                    nuevo.setNombre(r);
-                    return rolRepository.save(nuevo);
-                });
+                    .orElseGet(() -> {
+                        Rol nuevo = new Rol();
+                        nuevo.setNombre(r);
+                        return rolRepository.save(nuevo);
+                    });
         }
-        if (usuarioRepository.count() == 0){
-        Rol adminRol = rolRepository.findByNombre("ADMIN").get();
+        if (usuarioRepository.findByDocumentoIdentidad("001").isEmpty()) {
+            Rol adminRol = rolRepository.findByNombre("ADMIN").get();
 
-        Admin admin = new Admin();
-        admin.setDocumentoIdentidad("001");
-        admin.setNombre("admin");
-        admin.setPassword(passwordEncoder.encode("root"));
-        admin.setRol(adminRol);
-        admin.setActivo(true);
-        admin.setEmpresa(Empresa.JSK);
-        usuarioRepository.save(admin);
+            Admin admin = new Admin();
+            admin.setDocumentoIdentidad("001");
+            admin.setNombre("admin");
+            admin.setPassword(passwordEncoder.encode("root"));
+            admin.setRol(adminRol);
+            admin.setActivo(true);
+            admin.setEmpresa(Empresa.JSK);
+            usuarioRepository.save(admin);
 
-        System.out.println("Ola soy homelo chino");
+        }
     }
-    }
-    
+
 }

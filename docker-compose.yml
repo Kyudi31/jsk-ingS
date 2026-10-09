@@ -1,0 +1,24 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: jsk-app
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      # Configuración de base de datos H2 persistente por defecto
+      - SPRING_DATASOURCE_URL=jdbc:h2:file:/app/data/testdb;DB_CLOSE_ON_EXIT=FALSE
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.h2.Driver
+      - SPRING_DATASOURCE_USERNAME=sa
+      - SPRING_DATASOURCE_PASSWORD=
+      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.H2Dialect
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - JAVA_OPTS=-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0
+    volumes:
+      - jsk-data:/app/data
+
+volumes:
+  jsk-data:
+    name: jsk-data
