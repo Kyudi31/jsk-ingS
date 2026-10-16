@@ -31,7 +31,7 @@ jobs:
       - name: Generar resumen de pruebas en GitHub Actions
         if: always()
         run: |
-          echo "### 📊 Resumen de Ejecución de Pruebas" >> $GITHUB_STEP_SUMMARY
+          echo "### Resumen de Ejecución de Pruebas" >> $GITHUB_STEP_SUMMARY
           if [ -d "target/surefire-reports" ]; then
             echo '```' >> $GITHUB_STEP_SUMMARY
             grep -h -E "FAILURE!|AssertionFailedError" target/surefire-reports/*.txt 2>/dev/null | head -n 15 >> $GITHUB_STEP_SUMMARY || echo "No se encontraron detalles de fallos." >> $GITHUB_STEP_SUMMARY
