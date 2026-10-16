@@ -25,7 +25,7 @@ class ObjetivoTest {
         assertEquals(50.0, porcentaje, 0.001);
     }
 
-    @Test
+    /*@Test
     @DisplayName("Debe calcular correctamente el porcentaje por valor de ventas [FALLO INTENCIONAL PARA CI]")
     void deberiaCalcularPorcentajeCorrectamente_CuandoEsPorValor() {
         // Arrange
@@ -39,7 +39,7 @@ class ObjetivoTest {
 
         // Assert - Provocamos el fallo intencional para que sea visible en GitHub Actions
         assertEquals(100.0, porcentaje, 0.001, "ERROR INTENCIONAL: Se esperaba 100.0% para visualizar el fallo en GitHub Actions");
-    }
+    }*/
 
     @Test
     @DisplayName("Debe retornar 0.0 si la meta es cero o nula para evitar división por cero")
