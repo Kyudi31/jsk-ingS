@@ -15,7 +15,7 @@ class ObjetivoTest {
         // Arrange
         Objetivo objetivo = new Objetivo();
         objetivo.setTipo(Objetivo.TipoObjetivo.VENTAS_CANTIDAD);
-        objetivo.setMetaVentas(0);
+        objetivo.setMetaVentas(80);
         objetivo.setProgresoVentas(40);
 
         // Act
@@ -26,19 +26,19 @@ class ObjetivoTest {
     }
 
     @Test
-    @DisplayName("Debe calcular correctamente el porcentaje por valor de ventas")
+    @DisplayName("Debe calcular correctamente el porcentaje por valor de ventas [FALLO INTENCIONAL PARA CI]")
     void deberiaCalcularPorcentajeCorrectamente_CuandoEsPorValor() {
         // Arrange
         Objetivo objetivo = new Objetivo();
         objetivo.setTipo(Objetivo.TipoObjetivo.VENTAS_VALOR);
-        objetivo.setMetaValor(null);
+        objetivo.setMetaValor(2000.0);
         objetivo.setProgresoValor(500.0);
 
-        // Act
+        // Act (500.0 / 2000.0 * 100 = 25.0%)
         Double porcentaje = objetivo.getPorcentajeCompletado();
 
-        // Assert
-        assertEquals(25.0, porcentaje, 0.001);
+        // Assert - Provocamos el fallo intencional para que sea visible en GitHub Actions
+        assertEquals(100.0, porcentaje, 0.001, "ERROR INTENCIONAL: Se esperaba 100.0% para visualizar el fallo en GitHub Actions");
     }
 
     @Test

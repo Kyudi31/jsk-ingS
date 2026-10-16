@@ -1,0 +1,32 @@
+{
+  "name": "JSK Spring Boot (Codespaces)",
+  "image": "mcr.microsoft.com/devcontainers/java:1-17-bullseye",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "java.configuration.runtimes": [
+          {
+            "name": "JavaSE-17",
+            "path": "/usr/lib/jvm/msopenjdk-current",
+            "default": true
+          }
+        ]
+      },
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "vmware.vscode-spring-boot",
+        "vscjava.vscode-spring-boot-dashboard",
+        "vscjava.vscode-spring-initializr",
+        "humao.rest-client"
+      ]
+    }
+  },
+  "forwardPorts": [8080],
+  "portsAttributes": {
+    "8080": {
+      "label": "JSK Spring Boot Application",
+      "onAutoForward": "notify"
+    }
+  },
+  "postCreateCommand": "chmod +x mvnw && ./mvnw dependency:resolve -B"
+}
